@@ -16,7 +16,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./DB.js');
 
-const userRouter = require('./router/user.router');
+const catalogRouter = require('./router/catalog.router');
 
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
@@ -32,4 +32,5 @@ app.listen(PORT, function(){
 });
 
 // Router
-app.use(userRouter);
+// app.use(userRouter);
+app.use(catalogRouter);
