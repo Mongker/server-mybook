@@ -6,7 +6,7 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
- 
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -14,18 +14,20 @@ const Schema = mongoose.Schema;
 let Catalog = new Schema({
     name: {
         type: String,
+        required: true,
     },
     description: {
         type: String,
-    },
-    hasProducts: {
-        type: Array,
+        required: true,
     },
     amount: {
         type: Number,
+        required: true,
     },
     created: {
-        type: Date, default: Date.now
+        type: Date,
+        required: true,
+        default: new Date().getTime()
     }
 }, {
     collection: 'catalog'
