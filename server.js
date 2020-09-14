@@ -7,30 +7,35 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
+require('dotenv').config();
+console.log(process.env.MONGODB_URI);
 // server.js
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const PORT = 1999;
 const cors = require('cors');
 const mongoose = require('mongoose');
-const config = require('./DB.js');
 
+
+// Router
 const catalogRouter = require('./router/catalog.router');
+const productRouter = require('./router/product.router');
 
-mongoose.connect(config.DB, { useNewUrlParser: true }).then(
+const url_DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/myshop';
+const port = process.env.PORT || 1999
+mongoose.connect(url_DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
-    err => { console.log('Can not connect to the database'+ err)}
+    err => { console.log('Can not connect to the database '+ err)}
 );
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.listen(PORT, function(){
-    console.log('Server is running on Port:',PORT);
+app.listen(port, function(){
+    console.log('Server is running on Port:', port);
 });
 
 // Router
-// app.use(userRouter);
 app.use(catalogRouter);
+app.use(productRouter);

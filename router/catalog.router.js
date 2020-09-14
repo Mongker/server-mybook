@@ -8,12 +8,13 @@
  */
 
 const express = require('express');
-const userRouter = express.Router(); 
+const catalogRouter = express.Router(); 
+
 
 // container 
 const {GET, POST, DELETE, UPDATE} = require('../controller/catalog.controller')
 
-userRouter.route('/api/user').get(GET).post(POST);
-userRouter.route('/api/user/:id').delete(DELETE).put(UPDATE);
+catalogRouter.route('/api/catalog').get(GET).post(POST);
+catalogRouter.route('/api/catalog/:id').delete(DELETE).put(UPDATE);
 
-module.exports = userRouter;
+module.exports = catalogRouter;
