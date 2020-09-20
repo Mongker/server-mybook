@@ -20,6 +20,7 @@ const mongoose = require('mongoose');
 // Router
 const catalogRouter = require('./router/catalog.router');
 const productRouter = require('./router/product.router');
+const sliderRouter = require('./router/slider.router');
 
 const url_DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/myshop';
 const port = process.env.PORT || 1999
@@ -39,3 +40,4 @@ app.listen(port, function(){
 // Router
 app.use(catalogRouter);
 app.use(productRouter);
+app.use(sliderRouter);
