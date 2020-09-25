@@ -24,7 +24,7 @@ const Product = new Schema({
     price: {
         type: Number,
         require: true,
-        default: ''
+        default: 0
     },
     image_link: {
         type: Array,

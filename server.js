@@ -21,9 +21,10 @@ const mongoose = require('mongoose');
 const catalogRouter = require('./router/catalog.router');
 const productRouter = require('./router/product.router');
 const sliderRouter = require('./router/slider.router');
+const adminRouter = require('./router/admin.router');
 
 const url_DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/myshop';
-const port = process.env.PORT || 1999
+const port = process.env.PORT || 1999;
 mongoose.connect(url_DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database '+ err)}
@@ -41,3 +42,4 @@ app.listen(port, function(){
 app.use(catalogRouter);
 app.use(productRouter);
 app.use(sliderRouter);
+app.use(adminRouter);
