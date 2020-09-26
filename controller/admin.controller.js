@@ -10,9 +10,6 @@
 // model
 const Admin = require('../model/admin.model');
 
-const date = new Date();
-const now = date.toString();
-
 module.exports = {
     GET: async function (req, res) {
         await Admin.find(function (err, data) {
@@ -20,9 +17,14 @@ module.exports = {
             else {
                 const objectData = {};
                 data.map((item)=> {
-                    objectData[item._id] = item;
+                    objectData[item._id] = {
+                        "_id": item.id,
+                        "name": item.name,
+                        "email": item.email,
+                        "rank": item.rank,
+                        "avatar": item.avatar,
+                    };
                 });
-                console.log(objectData);
                 return res.status(200).json(objectData)
             }
         })

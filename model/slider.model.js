@@ -26,5 +26,7 @@ const Slider = new Schema({
         require: true,
         default: 0
     }
+}, {
+    collection: 'slider'
 });
 module.exports = mongoose.model('Slider', Slider, 'slider')

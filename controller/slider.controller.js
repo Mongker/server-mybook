@@ -19,7 +19,7 @@ module.exports = {
     POST:async function (req, res) {
         console.log(req.body);
         // req.body.created = now;
-       await Slider(req.body).save().then((product) => { res.json({ message: 'SUCCESS' }) }).catch((err) => { res.status(500).json({ message: 'error' }) })
+       await Slider(req.body).save().then((slider) => { res.json({ message: 'SUCCESS' }) }).catch((err) => { res.status(500).json({ message: 'error' }) })
     },
     DELETE:async function (req, res) {
         await Slider.findByIdAndRemove({_id: req.params.id}, function(err, Product){
