@@ -23,6 +23,16 @@ let Admin = new Schema({
         required: true,
         default: '',
     },
+    phone: {
+        type: String,
+        required: true,
+        default: '',
+    },
+    info: {
+        type: String,
+        required: true,
+        default: '{}',
+    },
     password: {
         type: String,
         required: true,

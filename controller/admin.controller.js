@@ -31,7 +31,7 @@ module.exports = {
     },
     POST:async function (req, res) {
         console.log(req.body);
-        await Admin(req.body).save().then((admin) => { res.json({ message: 'SUCCESS' }) }).catch((err) => { res.status(500).json({ message: 'error' }) })
+        await Admin(req.body).save().then((admin) => { res.json({ message: 'SUCCESS' }) }).catch((err) => { res.status(500).json({ message: err }) })
     },
     DELETE:async function (req, res) {
         await Admin.findByIdAndRemove({_id: req.params.id}, function(err, catalog){
