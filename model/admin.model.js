@@ -10,7 +10,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const Boolean = mongoose.Schema.Types.Boolean;
 // Define collection and schema for Business
 let Admin = new Schema({
     name: {
@@ -42,6 +42,11 @@ let Admin = new Schema({
         type: String,
         require: true,
         default: ''
+    },
+    status: {
+        type: Boolean,
+        require: true,
+        default: true
     },
     avatar: {
         type: String,

@@ -25,6 +25,7 @@ module.exports = {
                         "avatar": item.avatar,
                         "phone": item.phone,
                         "info": item.info,
+                        "status": item.status,
                     };
                 });
                 return res.status(200).json(objectData)
