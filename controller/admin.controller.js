@@ -21,8 +21,10 @@ module.exports = {
                         "_id": item.id,
                         "name": item.name,
                         "email": item.email,
-                        "rank": item.rank,
+                        "position": item.position,
                         "avatar": item.avatar,
+                        "phone": item.phone,
+                        "info": item.info,
                     };
                 });
                 return res.status(200).json(objectData)

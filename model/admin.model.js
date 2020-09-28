@@ -38,10 +38,10 @@ let Admin = new Schema({
         required: true,
         default: '',
     },
-    rank: {
-        type: Number,
+    position: {
+        type: String,
         require: true,
-        default: 0
+        default: ''
     },
     avatar: {
         type: String,
