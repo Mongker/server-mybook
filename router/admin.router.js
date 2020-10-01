@@ -12,7 +12,7 @@ const catalogRouter = express.Router();
 
 
 // container
-const {GET, POST, DELETE, UPDATE, GET_ID} = require('../controller/admin.controller')
+const {GET, POST, DELETE, UPDATE, GET_ID} = require('../controller/admin.controller');
 
 catalogRouter.route('/api/admin').get(GET).post(POST);
 catalogRouter.route('/api/admin/:id').get(GET_ID).delete(DELETE).put(UPDATE);

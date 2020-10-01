@@ -50,15 +50,14 @@ module.exports = {
     },
     UPDATE:async function (req, res) {
         await Admin.findById(req.params.id, function(err, admin) {
-            if (!catalog)
+            if (!admin)
                 res.status(404).send("data is not found");
             else {
-                catalog.name = req.body.name;
-                catalog.description = req.body.description;
-                catalog.hasProducts = req.body.hasProducts;
-                catalog.amount = req.body.amount;
-                console.log(catalog);
-                catalog.save().then(business => {
+                admin.position = req.body.position;
+                admin.status = req.body.status;
+                (req.body.password) && (admin.password = req.body.password);
+                console.log(admin);
+                admin.save().then(business => {
                     res.json({ message: 'SUCCESS'});
                 })
                     .catch(err => {
