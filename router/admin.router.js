@@ -10,7 +10,6 @@
 const express = require('express');
 const catalogRouter = express.Router();
 
-
 // container
 const {GET, POST, DELETE, UPDATE, GET_ID} = require('../controller/admin.controller');
 

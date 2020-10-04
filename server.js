@@ -22,6 +22,7 @@ const catalogRouter = require('./router/catalog.router');
 const productRouter = require('./router/product.router');
 const sliderRouter = require('./router/slider.router');
 const adminRouter = require('./router/admin.router');
+const uploadRouter = require('./router/upload.router');
 
 const url_DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/myshop';
 const port = process.env.PORT || 1999;
@@ -29,7 +30,11 @@ mongoose.connect(url_DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database '+ err)}
 );
-
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+};
+// app.use(cors(corsOptions));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -43,3 +48,4 @@ app.use(catalogRouter);
 app.use(productRouter);
 app.use(sliderRouter);
 app.use(adminRouter);
+app.use("/api/file", uploadRouter);
