@@ -33,13 +33,15 @@ uploadRouter.post('/upload', imageUploader.single('file'), (req, res) => {
     console.log(processedFile.path);
     // Đổi tên của file vừa upload lên, vì multer đang đặt default ko có đuôi file
     // const newFullPath = `${fullPathInServ}-${orgName}`;
-    const newFullPath = `images\\${getMaxId()}-${orgName}`;
-    console.log(newFullPath);
-    fs.renameSync(fullPathInServ, newFullPath);
+    const link_img = `${getMaxId()}-${orgName}`;
+    const newFullPathUbuntu = 'images/'+link_img; // Ubuntu
+    // const newFullPathWin = `images\\`+link_img; // Win 10
+    console.log('newFullPath: '+newFullPathUbuntu);
+    fs.renameSync(fullPathInServ, newFullPathUbuntu);
     res.send({
         status: true,
         message: 'file uploaded',
-        fileNameInServer: newFullPath
+        fileNameInServer: link_img
     })
 });
 uploadRouter.get('/:name', (req, res) => {
