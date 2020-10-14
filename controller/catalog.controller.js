@@ -17,7 +17,14 @@ module.exports = {
     GET: async function (req, res) {
         await Catalog.find(function (err, data) {
             if (err) return res.status(404).json({ message: err })
-            else return res.status(200).json(data);
+            else {
+                const objectData = {};
+                data.map((item)=> {
+                    objectData[item._id] = item;
+                });
+                console.log(objectData);
+                return res.status(200).json(objectData)
+            };
         })
     },
     POST:async function (req, res) {

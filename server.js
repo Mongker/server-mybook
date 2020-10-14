@@ -26,7 +26,7 @@ const uploadRouter = require('./router/upload.router');
 const url_DBOnline = "mongodb+srv://mongker:S211199@gmail.com@cluster0.tpvqz.gcp.mongodb.net/mybook?retryWrites=true&w=majority";
 const url_DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/myshop';
 const port = process.env.PORT || 1999;
-mongoose.connect(url_DBOnline, { useNewUrlParser: true }).then(
+mongoose.connect(url_DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database '+ err)}
 );
