@@ -28,7 +28,11 @@ module.exports = {
     },
     POST:async function (req, res) {
         // req.body.created = now;
-       await Catalog(req.body).save().then((catalog) => { res.json({ message: 'successfully' }) }).catch((err) => { res.status(500).json({ message: 'error' }) })
+       const data = {
+           name: req.body.name || '',
+           description: req.body.description || '',
+       };
+       await Catalog({...data}).save().then((catalog) => { res.json({ message: 'SUCCESS' }) }).catch((err) => { res.status(500).json({ message: 'error' }) })
     },
     DELETE:async function (req, res) {
         await Catalog.findByIdAndRemove({_id: req.params.id}, function(err, catalog){
