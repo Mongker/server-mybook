@@ -5,8 +5,15 @@ const Product = require('../model/product.model');
 module.exports = {
     GET: async function (req, res) {
         await Product.find(function (err, data) {
-            if (err) return res.status(404).json({ message: err })
-            else return res.status(200).json(data);
+            if (err) return res.status(404).json({ message: err });
+
+            else {
+                const objectData = {};
+                data.map((item)=> {
+                    objectData[item._id] = item;
+                });
+                return res.status(200).json(data)
+            }
         })
     },
     POST:async function (req, res) {
@@ -38,5 +45,18 @@ module.exports = {
                     });
             }
         });
-    }
-}
+    },
+    GET_ID_CATALOG:async function (req, res) {
+        console.log(req.params.id);
+        await Product.find({'catalog_id': req.params.id}, function(err, product){
+            if (err) return res.status(404).json({ message: err });
+            else {
+                const objectData = {};
+                product.map((item)=> {
+                    objectData[item._id] = item;
+                });
+                return res.status(200).json(objectData)
+            }
+        });
+    },
+};

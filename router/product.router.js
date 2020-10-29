@@ -10,11 +10,11 @@
  const express = require('express');
 
  //controller
- const {GET, POST, DELETE, UPDATE} = require('../controller/product.container');
+ const {GET_ID_CATALOG, GET, POST, DELETE, UPDATE} = require('../controller/product.container');
 
- // const 
+ // const
  const productRouter = express.Router();
 
  productRouter.route('/api/product').get(GET).post(POST);
- productRouter.route('/api/product/:id').delete(DELETE).put(UPDATE);
+ productRouter.route('/api/product/:id').delete(DELETE).put(UPDATE).get(GET_ID_CATALOG);
  module.exports = productRouter;
