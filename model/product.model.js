@@ -21,6 +21,11 @@ const Product = new Schema({
         require: true,
         default: ''
     },
+    description: {
+        type: String,
+        require: true,
+        default: ''
+    },
     price: {
         type: Number,
         require: true,
@@ -63,6 +68,20 @@ const Product = new Schema({
         type: Number,
         require: true,
         default: 0,
+    },
+    sold: {
+        type: Number,
+        require: true,
+        default: 0,
+    },
+    history_amount: {
+        type: Map,
+        require: true,
+        default: {
+            itemIds: [],
+            items: {},
+            total: 0,
+        },
     }
 });
 module.exports = mongoose.model('Product', Product, 'product')
