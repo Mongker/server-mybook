@@ -12,7 +12,7 @@ module.exports = {
                 data.map((item)=> {
                     objectData[item._id] = item;
                 });
-                return res.status(200).json(data)
+                return res.status(200).json(objectData)
             }
         })
     },
@@ -46,13 +46,13 @@ module.exports = {
                 res.status(404).send("data is not found");
             else {
                 Product.name = req.body.name;
+                Product.catalog_id = req.body.catalog_id;
                 Product.description = req.body.description;
                 Product.hasProducts = req.body.hasProducts;
                 Product.amount = req.body.amount;
                 Product.image_link = req.body.image_link;
                 Product.price = req.body.price;
-                Product.history_amount = req.body.history_amount;
-                console.log(Product);
+                (req.body.history_amount !== 0) && (Product.history_amount = req.body.history_amount);
                 (Product).save().then(business => {
                     res.json({ message: 'SUCCESS'});
                 })
