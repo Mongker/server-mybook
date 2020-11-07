@@ -19,9 +19,11 @@ const mongoose = require('mongoose');
 
 // Router
 const catalogRouter = require('./router/catalog.router');
+const userRouter = require('./router/use.router');
 const productRouter = require('./router/product.router');
 const sliderRouter = require('./router/slider.router');
 const adminRouter = require('./router/admin.router');
+const cartRouter = require('./router/cart.router');
 const uploadRouter = require('./router/upload.router');
 const url_DBOnline = "mongodb+srv://mongker:S211199@gmail.com@cluster0.tpvqz.gcp.mongodb.net/mybook?retryWrites=true&w=majority";
 const url_DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/myshop';
@@ -52,4 +54,6 @@ app.use(catalogRouter);
 app.use(productRouter);
 app.use(sliderRouter);
 app.use(adminRouter);
+app.use(userRouter);
+app.use(cartRouter);
 app.use("/api/file", uploadRouter);
