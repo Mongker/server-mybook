@@ -16,7 +16,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-
 // Router
 const catalogRouter = require('./router/catalog.router');
 const userRouter = require('./router/use.router');
@@ -25,16 +24,19 @@ const sliderRouter = require('./router/slider.router');
 const adminRouter = require('./router/admin.router');
 const cartRouter = require('./router/cart.router');
 const uploadRouter = require('./router/upload.router');
-const url_DBOnline = "mongodb+srv://mongker:S211199@gmail.com@cluster0.tpvqz.gcp.mongodb.net/mybook?retryWrites=true&w=majority";
+const urlRouter = require('./router/url.router');
+
+// DATA
+const url_DBOnline = 'mongodb+srv://mongker:S211199@gmail.com@cluster0.tpvqz.gcp.mongodb.net/mybook?retryWrites=true&w=majority';
 const url_DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/myshop';
 const port = process.env.PORT || 1999;
-mongoose.connect(url_DBOnline, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}).then(
+mongoose.connect(url_DBOnline, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).then(
     () => {
-        console.log('Database is connected')
+        console.log('Database is connected');
     },
-    err => {
-        console.log('Can not connect to the database ' + err)
-    }
+    (err) => {
+        console.log('Can not connect to the database ' + err);
+    },
 );
 const corsOptions = {
     origin: 'http://localhost:3000',
@@ -42,10 +44,10 @@ const corsOptions = {
 };
 // app.use(cors(corsOptions));
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.listen(port, function(){
+app.listen(port, function () {
     console.log('Server is running on Port:', port);
 });
 
@@ -56,4 +58,5 @@ app.use(sliderRouter);
 app.use(adminRouter);
 app.use(userRouter);
 app.use(cartRouter);
-app.use("/api/file", uploadRouter);
+app.use(urlRouter);
+app.use('/api/file', uploadRouter);

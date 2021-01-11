@@ -9,7 +9,7 @@
 const express = require('express');
 
 //controller
-const {GET, GET_ID, POST, DELETE, UPDATE} = require('../controller/cart.container');
+const { GET, GET_ID, POST, DELETE, UPDATE } = require('../controller/cart.controller');
 
 // const
 const cartRouter = express.Router();
