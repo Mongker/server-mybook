@@ -10,52 +10,59 @@
 // model
 const Catalog = require('../model/catalog.model');
 
-const date = new Date();
-
 module.exports = {
     GET: async function (req, res) {
         await Catalog.find(function (err, data) {
-            if (err) return res.status(404).json({ message: err })
+            if (err) return res.status(404).json({ message: err });
             else {
                 const objectData = {};
-                data.map((item)=> {
+                data.map((item) => {
                     objectData[item._id] = item;
                 });
-                return res.status(200).json(objectData)
+                return res.status(200).json(objectData);
             }
-        })
-    },
-    POST:async function (req, res) {
-        // req.body.created = now;
-       const data = {
-           name: req.body.name || '',
-           description: req.body.description || '',
-       };
-       await Catalog({...data}).save().then((catalog) => { res.json({ message: 'SUCCESS' }) }).catch((err) => { res.status(500).json({ message: 'error' }) })
-    },
-    DELETE:async function (req, res) {
-        await Catalog.findByIdAndRemove({_id: req.params.id}, function(err, catalog){
-            if(err) res.json(err);
-            else res.json({ message: 'SUCCESS'});
         });
     },
-    UPDATE:async function (req, res) {
-        await Catalog.findById(req.params.id, function(err, catalog) {
-            if (!catalog)
-                res.status(404).send("data is not found");
+    POST: async function (req, res) {
+        // req.body.created = now;
+        const data = {
+            name: req.body.name || '',
+            description: req.body.description || '',
+            paramId: req.body.paramId || '-1',
+        };
+        await Catalog({ ...data })
+            .save()
+            .then((catalog) => {
+                res.json({ message: 'SUCCESS' });
+            })
+            .catch((err) => {
+                res.status(500).json({ message: 'error' });
+            });
+    },
+    DELETE: async function (req, res) {
+        await Catalog.findByIdAndRemove({ _id: req.params.id }, function (err, catalog) {
+            if (err) res.json(err);
+            else res.json({ message: 'SUCCESS' });
+        });
+    },
+    UPDATE: async function (req, res) {
+        await Catalog.findById(req.params.id, function (err, catalog) {
+            if (!catalog) res.status(404).send('data is not found');
             else {
                 catalog.name = req.body.name;
                 catalog.description = req.body.description;
                 catalog.hasProducts = req.body.hasProducts;
                 catalog.amount = req.body.amount;
                 console.log(catalog);
-                catalog.save().then(business => {
-                    res.json({ message: 'SUCCESS'});
-                })
-                    .catch(err => {
-                        res.status(400).send({message: 'Failed to update catalog'});
+                catalog
+                    .save()
+                    .then((business) => {
+                        res.json({ message: 'SUCCESS' });
+                    })
+                    .catch((err) => {
+                        res.status(400).send({ message: 'Failed to update catalog' });
                     });
             }
         });
-    }
+    },
 };
