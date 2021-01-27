@@ -60,11 +60,12 @@ module.exports = {
                 Product.name = req.body.name;
                 Product.catalog_id = req.body.catalog_id;
                 Product.description = req.body.description;
-                Product.hasProducts = req.body.hasProducts;
                 Product.amount = req.body.amount;
                 Product.image_link = req.body.image_link;
                 Product.price = req.body.price;
-                req.body.history_amount !== 0 && (Product.history_amount = req.body.history_amount);
+                Product.price_ceo = req.body.price_ceo;
+                (req.body.hasProducts) && (Product.hasProducts = req.body.hasProducts);
+                (req.body.history_amount !== 0) && (Product.history_amount = req.body.history_amount);
                 Product.save()
                     .then((business) => {
                         res.status(200).json({ message: 'SUCCESS' });

@@ -50,9 +50,9 @@ module.exports = {
             if (!catalog) res.status(404).send('data is not found');
             else {
                 catalog.name = req.body.name;
-                catalog.description = req.body.description;
-                catalog.hasProducts = req.body.hasProducts;
-                catalog.amount = req.body.amount;
+                // catalog.description = req.body.description;
+                // catalog.hasProducts = req.body.hasProducts;
+                // catalog.amount = req.body.amount;
                 console.log(catalog);
                 catalog
                     .save()

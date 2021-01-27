@@ -1,15 +1,6 @@
 /**
  * Copyright 2020 present, Lê Văn Mong.
  * All rights reserved.
- * @author Mongker on 06/11/2020
- * @email: levanmong.dola.99@gmail.com
- * @student-code: 68DCHT20091
- * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
- */
-
-/**
- * Copyright 2020 present, Lê Văn Mong.
- * All rights reserved.
  * @author Mong_Le_Van on 25/09/2020
  * @email: levanmong.dola.99@gmail.com
  * @student-code: 68DCHT20091
@@ -41,17 +32,18 @@ module.exports = {
     },
     POST: async function (req, res) {
         console.log(req.body);
-        await User.find({email: req.body.email}, function (err, User) {
+        await User.find({email: req.body.email}, function (err, user) {
             if (err) return res.status(404).json({message: err});
-            else if(User.length === 1) {
-                return res.status(200).json({message: 'Đã có tồn tại'})
+            else if(user.length === 1) {
+                return res.status(200).json({message: 'Đã có tài khoản này'})
+            } else {
+                User(req.body).save().then((User) => {
+                    res.json({message: 'SUCCESS'})
+                }).catch((err) => {
+                    res.status(500).json({message: err})
+                })
             }
         });
-        await User(req.body).save().then((User) => {
-            res.json({message: 'SUCCESS'})
-        }).catch((err) => {
-            res.status(500).json({message: err})
-        })
     },
     DELETE: async function (req, res) {
         await User.findByIdAndRemove({_id: req.params.id}, function (err, catalog) {
@@ -96,6 +88,7 @@ module.exports = {
             else if (data.length === 1 && req.body.email === data[0].email && req.body.password === data[0].password) {
                 return res.status(200).json({message: 'SUCCESS', ...data[0]._doc})
             } else {
+                console.log('data', data);
                 res.status(404).json({message: 'Wrong password or account'})
             }
         })

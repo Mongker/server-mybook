@@ -31,6 +31,11 @@ const Product = new Schema({
         require: true,
         default: 0
     },
+    price_seo: {
+        type: Number,
+        require: true,
+        default: 0
+    },
     image_link: {
         type: Array,
         require: true,

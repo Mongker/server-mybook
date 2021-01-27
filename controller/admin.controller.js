@@ -33,8 +33,13 @@ module.exports = {
         })
     },
     POST: async function (req, res) {
-        console.log(req.body);
-        await Admin(req.body).save().then((admin) => {
+        await Admin.find({email: req.body.email}, function (err, Admin) {
+            if (err) return res.status(404).json({message: err});
+            else if(Admin.length === 1) {
+                return res.status(200).json({message: 'Đã có tồn tại'})
+            }
+        });
+        return await Admin(req.body).save().then((admin) => {
             res.json({message: 'SUCCESS'})
         }).catch((err) => {
             res.status(500).json({message: err})
@@ -79,9 +84,9 @@ module.exports = {
     LOGIN: async function (req, res) {
         console.log(req.body);
         await Admin.find({'email': req.body.email}, function (err, data) {
-            if (err) return res.status(404).json({message: err});
+            if (err) return res.status(405).json({message: err});
             else if (data.length === 1 && req.body.email === data[0].email && req.body.password === data[0].password) {
-                return res.status(200).json({message: 'SUCCESS', id_admin: data[0]._id, email: data[0].email, password: data[0].password})
+                return res.status(200).json({message: 'SUCCESS', id_admin: data[0]._id, email: data[0].email, password: data[0].password, avatar: data[0].avatar, name: data[0].name, position: data[0].position})
             } else {
                 res.status(404).json({message: 'Wrong password or account'})
             }
